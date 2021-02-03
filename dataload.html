@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Data load</h1>
+    <ul id="users-container">
+        <h2>User Names</h2>
+    </ul>
+    <script>
+        // fake rest api for fetching fake data 
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayUser(json))
+
+        // data load from server and display them to UI  
+        function displayUser(users) {
+            //fetching user names from the users list
+            const userNames = users.map(user => user.username);
+            const ul = document.getElementById("users-container");
+            for(let i = 0; i < userNames.length; i++){
+                let username = userNames[i];
+                const li = document.createElement('li');
+                li.innerText = username;
+                ul.appendChild(li);
+            }
+        }
+    </script>
+</body>
+
+</html>

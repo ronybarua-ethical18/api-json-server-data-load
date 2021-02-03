@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Http Request</title>
+</head>
+
+<body>
+
+    <!-- what is http request ?  -->
+
+    <!-- HTTP works as a request-response protocol between a client and server. Example: A client (browser) sends an HTTP request to the server; then the server returns a response to the client. The response contains status information about the request and may also contain the requested content. -->
+
+    <ul id="users-container">
+        <h2>User Names</h2>
+    </ul>
+
+    <script>
+
+        // fetch is a promise and it is calling to data center to load users data from data center 
+        // fake rest api for fetching fake data 
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => displayUser(json))
+            .catch(error => console.log(error)); //set the default message  to shows an error if server cannot fulfil request
+
+        // data load from server and display them to UI  
+        function displayUser(users) {
+            //fetching user names from the users list
+            const userNames = users.map(user => user.username);
+            const ul = document.getElementById("users-container");
+            for(let i = 0; i < userNames.length; i++){
+                let username = userNames[i];
+                const li = document.createElement('li');
+                li.innerText = username;
+                ul.appendChild(li);
+            }
+        }
+    </script>
+</body>
+
+</html>
